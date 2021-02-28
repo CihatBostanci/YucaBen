@@ -35,11 +35,18 @@ class SummaryModel : ObservableObject {
         }
     }
     
-    init(pieceTotal: String,forPlakaTotal: String,amountForProfitText:String,newForProfitPlakaTextPricing:String  ) {
+    @Published var sumOfProfitText : String = "" {
+        willSet(newValue) {
+            print(newValue)
+        }
+    }
+    
+    init(pieceTotal: String,forPlakaTotal: String,amountForProfitText:String,newForProfitPlakaTextPricing:String,sumOfProfitText:String  ) {
         self.pieceTotal = pieceTotal
         self.forPlakaTotalPricing = forPlakaTotal
         self.amountForProfitText = amountForProfitText
         self.newForProfitPlakaTextPricing = newForProfitPlakaTextPricing
+        self.sumOfProfitText = sumOfProfitText
     }
    
 }
@@ -50,7 +57,7 @@ struct SummaryView : View {
     @Binding var perPlakaText : String
     @Binding var amountForProfitText : String
     @Binding var newForProfitPlakaTextPricing : String
-   
+    @Binding var sumOfProfitText : String
     var body: some View {
         return
             VStack(alignment: .leading, spacing: 10, content:{
@@ -95,6 +102,16 @@ struct SummaryView : View {
                     
                 }
                 
+             HStack{
+                    Text("Toplam Kar:"  )
+                            .font(.system(size: 20))
+                            .bold()
+                            .font(.title)
+                            .accentColor(.black)
+                    Text(sumOfProfitText)
+                    Text(" TL")
+                        
+                    }
            
         })
         
@@ -105,7 +122,7 @@ struct ChooseFeatureView: View {
     
     @Binding var navigationBarHidden: Bool
     @EnvironmentObject var viewModel: DetailViewModel
-    @ObservedObject var summaryModel = SummaryModel(pieceTotal: "0",forPlakaTotal: "0", amountForProfitText: "0", newForProfitPlakaTextPricing: "0")
+    @ObservedObject var summaryModel = SummaryModel(pieceTotal: "0",forPlakaTotal: "0", amountForProfitText: "0", newForProfitPlakaTextPricing: "0", sumOfProfitText: "0")
    
     
     var body: some View {
@@ -193,7 +210,8 @@ struct ChooseFeatureView: View {
                         SummaryView(perPieceText: self.$summaryModel.pieceTotal,
                                     perPlakaText: self.$summaryModel.forPlakaTotalPricing,
                                     amountForProfitText: self.$summaryModel.amountForProfitText,
-                                    newForProfitPlakaTextPricing:self.$summaryModel.newForProfitPlakaTextPricing
+                                    newForProfitPlakaTextPricing:self.$summaryModel.newForProfitPlakaTextPricing,
+                                    sumOfProfitText: self.$summaryModel.sumOfProfitText
                                     )
                        
                         

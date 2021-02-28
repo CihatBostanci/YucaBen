@@ -127,7 +127,11 @@ struct CheckboxFieldView : View {
         let amountForProfitStr = String((newForPlakaTotalF * pieceNumberF) )
         summaryModel.amountForProfitText = amountForProfitStr
         
-        print(" Plaka Birim Fiyatı :\(forPlakaTotalStr)  Toplam Tutar :\(amountForProfitStr) Yeni Plaka Birim Fiyatı :\(newForPlakaTotalF) ")
+        let sumOfProfitF = (newForPlakaTotalF * pieceNumberF) - (forPlakaTotalF * pieceNumberF)
+        let sumOfProfitStr = String(sumOfProfitF)
+        summaryModel.sumOfProfitText = sumOfProfitStr
+        
+        print(" Plaka Birim Fiyatı :\(forPlakaTotalStr)  Toplam Tutar :\(amountForProfitStr) Yeni Plaka Birim Fiyatı :\(newForPlakaTotalF) Kar Toplam:\(sumOfProfitF)  ")
     }
 }
 
