@@ -49,11 +49,10 @@ struct CheckboxFieldView : View {
                                     
                                     setSummaryModel(pieceTotal:  String(summaryModel.pieceTotal), productSheetF: productSheetF, pieceNumberF: pieceNumberF, profitDegreeF: profitDegreeF)
                                 
-                                    
                                     print("all fun:" , summaryModel.pieceTotal)
                                 case .meterFunctionality:
-                                    
                                     summaryModel.pieceTotal = meterFunc(pieceTotal: pieceTotalF , height: heightF, width:widthF, perAmount:perAmountF, sumOrMinus: self.checkState)
+                                    
                                     setSummaryModel(pieceTotal:  summaryModel.pieceTotal, productSheetF: productSheetF, pieceNumberF: pieceNumberF, profitDegreeF: profitDegreeF)
                                 
                                     print("meter fun:",summaryModel.pieceTotal)
@@ -65,11 +64,19 @@ struct CheckboxFieldView : View {
                                     print("non fun:", summaryModel.pieceTotal)
                                 case .printingFunctionality:
                                     summaryModel.pieceTotal = nonFunc(pieceTotal: pieceTotalF, perAmount: perAmountF,sumOrMinus:self.checkState)
+                                    
                                     setSummaryModel(pieceTotal:  summaryModel.pieceTotal, productSheetF: productSheetF, pieceNumberF: pieceNumberF, profitDegreeF: profitDegreeF)
                             
                                     print("printing fun:", summaryModel.pieceTotal)
+                                 
+                                case .sideAndDeepFunctionality:
+                                    summaryModel.pieceTotal = sideFunc(pieceTotal: pieceTotalF, perAmount:perAmountF,sumOrMinus: self.checkState, productSheet: productSheetF)
                                     
-                                }
+                                    setSummaryModel(pieceTotal:  summaryModel.pieceTotal, productSheetF: productSheetF, pieceNumberF: pieceNumberF, profitDegreeF: profitDegreeF)
+                                
+                                    print("sideAndDeep fun:", summaryModel.pieceTotal)
+                                    
+                            }
         
                     }) {
             HStack(alignment: .center, spacing: 10) {
@@ -113,7 +120,11 @@ struct CheckboxFieldView : View {
         
         let forPlakaTotalF = Float(summaryModel.forPlakaTotalPricing) ?? 0.0
         let newForPlakaTotalF = (forPlakaTotalF * profitDegreeF/100) + forPlakaTotalF
-        let amountForProfitStr = String((forPlakaTotalF * pieceNumberF) + (newForPlakaTotalF * pieceNumberF))
+        
+        let newForPlakaTotalStr = String(format: "%.2f", newForPlakaTotalF)
+        summaryModel.newForProfitPlakaTextPricing = newForPlakaTotalStr
+        
+        let amountForProfitStr = String((newForPlakaTotalF * pieceNumberF) )
         summaryModel.amountForProfitText = amountForProfitStr
         
         print(" Plaka Birim Fiyatı :\(forPlakaTotalStr)  Toplam Tutar :\(amountForProfitStr) Yeni Plaka Birim Fiyatı :\(newForPlakaTotalF) ")
@@ -152,6 +163,17 @@ func nonFunc(pieceTotal: Float ,perAmount: Float , sumOrMinus: Bool ) -> String 
         sumOfFeature = pieceTotal  - perAmount
     }
     print("non inside:" , String(format: "%.2f", sumOfFeature ))
+
+    return String(format: "%.2f", sumOfFeature)
+}
+func sideFunc(pieceTotal: Float ,perAmount: Float , sumOrMinus: Bool,productSheet:Float ) -> String {
+    var sumOfFeature :Float = 0.0
+    if sumOrMinus {
+        sumOfFeature = pieceTotal  + (perAmount*productSheet)
+    } else {
+        sumOfFeature = pieceTotal  -  (perAmount*productSheet)
+    }
+    print("non inside:" , String(format: "%.2f", sumOfFeature  ))
 
     return String(format: "%.2f", sumOfFeature)
 }

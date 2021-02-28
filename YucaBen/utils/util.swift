@@ -23,4 +23,5 @@ enum Functionality {
     case meterFunctionality
     case nonFunctionality
     case printingFunctionality
+    case sideAndDeepFunctionality
 }

@@ -29,10 +29,17 @@ class SummaryModel : ObservableObject {
         }
     }
     
-    init(pieceTotal: String,forPlakaTotal: String,amountForProfitText:String  ) {
+    @Published var newForProfitPlakaTextPricing : String = "" {
+        willSet(newValue) {
+            print(newValue)
+        }
+    }
+    
+    init(pieceTotal: String,forPlakaTotal: String,amountForProfitText:String,newForProfitPlakaTextPricing:String  ) {
         self.pieceTotal = pieceTotal
         self.forPlakaTotalPricing = forPlakaTotal
         self.amountForProfitText = amountForProfitText
+        self.newForProfitPlakaTextPricing = newForProfitPlakaTextPricing
     }
    
 }
@@ -42,6 +49,7 @@ struct SummaryView : View {
     @Binding var perPieceText : String
     @Binding var perPlakaText : String
     @Binding var amountForProfitText : String
+    @Binding var newForProfitPlakaTextPricing : String
    
     var body: some View {
         return
@@ -57,7 +65,7 @@ struct SummaryView : View {
                 
             }
             HStack{
-                Text("Toplam Plaka Maliyet Birim Fiyatı:"  )
+                Text("Maliyet Birim Fiyatı:"  )
                     .font(.system(size: 20))
                     .bold()
                     .font(.title)
@@ -67,7 +75,17 @@ struct SummaryView : View {
                 
             }
             HStack{
-                Text("Kara Göre Tutar Fiyatı:"  )
+                    Text("Kar'a Göre Birim Fiyatı:"  )
+                        .font(.system(size: 20))
+                        .bold()
+                        .font(.title)
+                        .accentColor(.black)
+                    Text(newForProfitPlakaTextPricing)
+                    Text(" TL")
+                    
+                }
+            HStack{
+                Text("Kar'a Göre Tutar Fiyatı:"  )
                         .font(.system(size: 20))
                         .bold()
                         .font(.title)
@@ -87,7 +105,7 @@ struct ChooseFeatureView: View {
     
     @Binding var navigationBarHidden: Bool
     @EnvironmentObject var viewModel: DetailViewModel
-    @ObservedObject var summaryModel = SummaryModel(pieceTotal: "0",forPlakaTotal: "0", amountForProfitText: "0")
+    @ObservedObject var summaryModel = SummaryModel(pieceTotal: "0",forPlakaTotal: "0", amountForProfitText: "0", newForProfitPlakaTextPricing: "0")
    
     
     var body: some View {
@@ -128,15 +146,10 @@ struct ChooseFeatureView: View {
                                 .font(.system(size: 15))
                                 .font(.callout)
                                 .accentColor(.black)
-                            HStack{
-                                Text("Kar Oranı:  ")
-                                    .font(.system(size: 15))
-                                    .font(.callout)
-                                    .accentColor(.black)
-                                TextField("%", text: self.$viewModel.profitDegree , onCommit: {
-                                    UIApplication.shared.endEditing()
-                                }).keyboardType(.decimalPad)
-                            }
+                            Text("Kar Oranı:  " + String(viewModel.profitDegree))
+                                .font(.system(size: 15))
+                                .font(.callout)
+                                .accentColor(.black)
                             
                            
                         }
@@ -162,8 +175,8 @@ struct ChooseFeatureView: View {
                             CheckboxFieldView(checkState:false,title:"Kesim",perAmount: "0,10", functionalityType: Functionality.nonFunctionality).environmentObject(summaryModel).environmentObject(viewModel)
                             CheckboxFieldView(checkState:false,title:"Baskı",perAmount: findPrintAmount(piece: viewModel.piece, printAmount: viewModel.printAmount,productSheet: viewModel.productSheet),functionalityType:Functionality.printingFunctionality).environmentObject(summaryModel).environmentObject(viewModel)
                     
-                            CheckboxFieldView(checkState:false,title:"Yan Yapılandırma",perAmount: "0,10", functionalityType: Functionality.nonFunctionality).environmentObject(summaryModel).environmentObject(viewModel)
-                            CheckboxFieldView(checkState:false,title:"Dip Yapıştırma",perAmount: "0,20",functionalityType: Functionality.nonFunctionality).environmentObject(summaryModel).environmentObject(viewModel)
+                            CheckboxFieldView(checkState:false,title:"Yan Yapıştırma",perAmount: "0,10", functionalityType: Functionality.sideAndDeepFunctionality).environmentObject(summaryModel).environmentObject(viewModel)
+                            CheckboxFieldView(checkState:false,title:"Dip Yapıştırma",perAmount: "0,20",functionalityType: Functionality.sideAndDeepFunctionality).environmentObject(summaryModel).environmentObject(viewModel)
                             CheckboxFieldView(checkState:false,title:"UV Lak",perAmount: "0,40",functionalityType: Functionality.meterFunctionality).environmentObject(summaryModel).environmentObject(viewModel)
                             CheckboxFieldView(checkState:false,title:"Parlak Selefon",perAmount: "0,65",functionalityType: Functionality.meterFunctionality).environmentObject(summaryModel).environmentObject(viewModel)
                         }
@@ -171,7 +184,7 @@ struct ChooseFeatureView: View {
                             CheckboxFieldView(checkState:false,title:"Mat Selefon",perAmount: "0,75",functionalityType: Functionality.meterFunctionality).environmentObject(summaryModel).environmentObject(viewModel)
                         }
                         
-                        Divider()
+                       
                         Divider()
                         Spacer()
                         Spacer()
@@ -179,7 +192,8 @@ struct ChooseFeatureView: View {
                         //Passing the Binding to name
                         SummaryView(perPieceText: self.$summaryModel.pieceTotal,
                                     perPlakaText: self.$summaryModel.forPlakaTotalPricing,
-                                    amountForProfitText: self.$summaryModel.amountForProfitText
+                                    amountForProfitText: self.$summaryModel.amountForProfitText,
+                                    newForProfitPlakaTextPricing:self.$summaryModel.newForProfitPlakaTextPricing
                                     )
                        
                         
@@ -231,10 +245,3 @@ extension View {
 }
 
 
-
-
-struct ChooseFeatureView_LibraryContent: LibraryContentProvider {
-    var views: [LibraryItem] {
-        LibraryItem(/*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/)
-    }
-}

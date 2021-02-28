@@ -17,74 +17,87 @@ struct ContentView: View {
         NavigationView {
             ScrollView{
             VStack(alignment: .leading){
-                Spacer()
-                HStack(alignment: .center) {
-                    Text("Kutu Bilgileri")
-                        .font(.system(size: 25))
-                        .bold()
-                        .font(.title)
-                        .accentColor(.black)
+                    Spacer()
+                    Group{
+                    HStack(alignment: .center) {
+                        Text("Kutu Bilgileri")
+                            .font(.system(size: 25))
+                            .bold()
+                            .font(.title)
+                            .accentColor(.black)
+                        
+                    }.padding()
+                
+                    Spacer()
+                    HStack(alignment: .center) {
+                        Text("Plaka Gramaj:")
+                            .font(.callout)
+                            .bold()
+                        TextField("Gram",text: self.$viewModel.weight, onCommit: {
+                            UIApplication.shared.endEditing()
+                        }).keyboardType(.decimalPad).font(.callout)
+                    }.padding()
                     
-                }.padding()
-                
-                HStack(alignment: .center) {
-                    Text("Plaka Gramaj:")
-                        .font(.callout)
-                        .bold()
-                    TextField("Gram",text: self.$viewModel.weight, onCommit: {
-                        UIApplication.shared.endEditing()
-                    }).keyboardType(.decimalPad).font(.callout)
-                }.padding()
-                
-                HStack(alignment: .center) {
-                    Text("Plaka Boy:")
-                        .font(.callout)
-                        .bold()
-                    TextField("Cm",text: self.$viewModel.height, onCommit: {
-                        UIApplication.shared.endEditing()
-                    }).keyboardType(.decimalPad).font(.callout)
-                }.padding()
-                
-                HStack(alignment: .center) {
-                    Text("Plaka En:")
-                        .font(.callout)
-                        .bold()
-                    TextField("Cm", text: self.$viewModel.width, onCommit: {
-                        UIApplication.shared.endEditing()
-                    }).keyboardType(.decimalPad).font(.callout)
+                    HStack(alignment: .center) {
+                        Text("Plaka Boy:")
+                            .font(.callout)
+                            .bold()
+                        TextField("Cm",text: self.$viewModel.height, onCommit: {
+                            UIApplication.shared.endEditing()
+                        }).keyboardType(.decimalPad).font(.callout)
+                    }.padding()
                     
-                }.padding()
-                
-                HStack(alignment: .center) {
-                    Text("Kutu Adedi:")
-                        .font(.callout)
-                        .bold()
-                    TextField("Adet", text: self.$viewModel.piece, onCommit: {
-                        UIApplication.shared.endEditing()
-                    }).keyboardType(.decimalPad).font(.callout)
+                    HStack(alignment: .center) {
+                        Text("Plaka En:")
+                            .font(.callout)
+                            .bold()
+                        TextField("Cm", text: self.$viewModel.width, onCommit: {
+                            UIApplication.shared.endEditing()
+                        }).keyboardType(.decimalPad).font(.callout)
+                        
+                    }.padding()
+                }
+                Group{
+                    HStack(alignment: .center) {
+                        Text("Kutu Adedi:")
+                            .font(.callout)
+                            .bold()
+                        TextField("Adet", text: self.$viewModel.piece, onCommit: {
+                            UIApplication.shared.endEditing()
+                        }).keyboardType(.decimalPad).font(.callout)
+                        
+                    }.padding()
                     
-                }.padding()
-                
-                HStack(alignment: .center) {
-                    Text("Ürün/Tabaka:")
-                        .font(.callout)
-                        .bold()
-                    TextField( "Adet" ,text: self.$viewModel.productSheet, onCommit: {
-                        UIApplication.shared.endEditing()
-                    }).keyboardType(.decimalPad).font(.callout)
+                    HStack(alignment: .center) {
+                        Text("Ürün/Tabaka:")
+                            .font(.callout)
+                            .bold()
+                        TextField( "Adet" ,text: self.$viewModel.productSheet, onCommit: {
+                            UIApplication.shared.endEditing()
+                        }).keyboardType(.decimalPad).font(.callout)
+                        
+                    }.padding()
                     
-                }.padding()
-                
-                HStack(alignment: .center) {
-                    Text("Baskı:")
-                        .font(.callout)
-                        .bold()
-                    TextField( "Fiyat(tl)" ,text: self.$viewModel.printAmount, onCommit: {
-                        UIApplication.shared.endEditing()
-                    }).keyboardType(.decimalPad).font(.callout)
+                    HStack(alignment: .center) {
+                        Text("Baskı:")
+                            .font(.callout)
+                            .bold()
+                        TextField( "Fiyat(tl)" ,text: self.$viewModel.printAmount, onCommit: {
+                            UIApplication.shared.endEditing()
+                        }).keyboardType(.decimalPad).font(.callout)
+                        
+                    }.padding()
                     
-                }.padding()
-      
+                    HStack(alignment: .center) {
+                            Text("Kar Oranı:")
+                                .font(.callout)
+                                .bold()
+                            TextField("%", text: self.$viewModel.profitDegree , onCommit: {
+                                UIApplication.shared.endEditing()
+                            }).keyboardType(.decimalPad).font(.callout)
+                        }.padding()
+                }
+     
                 Spacer()
                 NavigationLink(destination: ChooseFeatureView(navigationBarHidden:$navigationBarHidden).environmentObject(viewModel)) {
                     Text("Bilgileri Onayla")
@@ -92,13 +105,13 @@ struct ContentView: View {
                         .padding()
                         .foregroundColor(.black)
                         .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.red]), startPoint: .leading, endPoint: .trailing))
-                        .cornerRadius(40)
+                        .cornerRadius(35)
                         
                 }
             }.navigationBarTitle("Ambalaj Maliyet")
-            .font(.system(size: 25))
+            .font(.system(size: 20))
             .frame(alignment: .center)
-            .padding(EdgeInsets(top: 0, leading: 30, bottom: 20, trailing: 0))
+            .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
         }
             
         }.onTapGesture {
