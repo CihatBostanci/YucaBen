@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E62517AB25F0157B006139CA /* Main.png in Resources */ = {isa = PBXBuildFile; fileRef = E62517AA25F0157B006139CA /* Main.png */; };
+		E62517B025F01582006139CA /* infopage.png in Resources */ = {isa = PBXBuildFile; fileRef = E62517AF25F01582006139CA /* infopage.png */; };
+		E62517B525F01588006139CA /* choosefeature.png in Resources */ = {isa = PBXBuildFile; fileRef = E62517B425F01588006139CA /* choosefeature.png */; };
 		E6776E7825E12D520034C9C4 /* YucaBenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6776E7725E12D520034C9C4 /* YucaBenApp.swift */; };
 		E6776E7A25E12D520034C9C4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6776E7925E12D520034C9C4 /* ContentView.swift */; };
 		E6776E7C25E12D530034C9C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6776E7B25E12D530034C9C4 /* Assets.xcassets */; };
@@ -34,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E62517AA25F0157B006139CA /* Main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Main.png; sourceTree = "<group>"; };
+		E62517AF25F01582006139CA /* infopage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = infopage.png; sourceTree = "<group>"; };
+		E62517B425F01588006139CA /* choosefeature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = choosefeature.png; sourceTree = "<group>"; };
 		E6776E7425E12D520034C9C4 /* YucaBen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YucaBen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6776E7725E12D520034C9C4 /* YucaBenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YucaBenApp.swift; sourceTree = "<group>"; };
 		E6776E7925E12D520034C9C4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +78,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E62517A925F0151D006139CA /* screenshot */ = {
+			isa = PBXGroup;
+			children = (
+				E62517B425F01588006139CA /* choosefeature.png */,
+				E62517AF25F01582006139CA /* infopage.png */,
+				E62517AA25F0157B006139CA /* Main.png */,
+			);
+			path = screenshot;
+			sourceTree = "<group>";
+		};
 		E6776E6B25E12D520034C9C4 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +109,7 @@
 		E6776E7625E12D520034C9C4 /* YucaBen */ = {
 			isa = PBXGroup;
 			children = (
+				E62517A925F0151D006139CA /* screenshot */,
 				E6FD527225E2C79900F69109 /* utils */,
 				E6A5C41725E1B079007EEAD5 /* view */,
 				E6776E7725E12D520034C9C4 /* YucaBenApp.swift */,
@@ -232,7 +249,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E62517B025F01582006139CA /* infopage.png in Resources */,
+				E62517AB25F0157B006139CA /* Main.png in Resources */,
 				E6776E7F25E12D530034C9C4 /* Preview Assets.xcassets in Resources */,
+				E62517B525F01588006139CA /* choosefeature.png in Resources */,
 				E6776E7C25E12D530034C9C4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
