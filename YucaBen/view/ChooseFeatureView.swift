@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-
+//Summary Model For Observe Data
 class SummaryModel : ObservableObject {
     
     @Published var pieceTotal : String = "" {
